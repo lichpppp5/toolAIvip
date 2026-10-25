@@ -14,10 +14,10 @@ htmlcov
 venv
 env
 tests/fixtures/*.mp4
-secrets/
-logs/
-audit/
-runtime/
+/secrets/
+/logs/
+/audit/
+/runtime/
 dist/
 build/
 *.egg-info

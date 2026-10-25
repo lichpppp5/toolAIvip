@@ -1,9 +1,9 @@
 # LiveGuard v1.0 — Architecture & Security Self-Review
 
-> **Document Version:** 1.0.0  
-> **Auditor Role:** Principal Security & Systems Architect (Independent Audit)  
-> **Status:** Final / Production-Ready Baseline  
-> **Repository:** `liveguard`  
+> **Document Version:** 1.0.0
+> **Auditor Role:** Principal Security & Systems Architect (Independent Audit)
+> **Status:** Final / Production-Ready Baseline
+> **Repository:** `liveguard`
 
 ---
 

@@ -23,11 +23,11 @@ htmlcov/
 node_modules/
 **/node_modules/
 
-# Secrets & Live Data
-secrets/
-logs/
-audit/
-runtime/
+# Secrets & Live Data (root directories only)
+/secrets/
+/logs/
+/audit/
+/runtime/
 
 # Test fixtures media
 tests/fixtures/*.mp4
