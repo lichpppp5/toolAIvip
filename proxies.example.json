@@ -1,0 +1,23 @@
+[
+  {
+    "id": "proxy_us_east_1",
+    "url": "http://user:secret@us-east.proxy.example.com:8080",
+    "type": "http",
+    "label": "US-Virginia-GeoTest",
+    "region": "US"
+  },
+  {
+    "id": "proxy_eu_central_1",
+    "url": "http://user:secret@eu-central.proxy.example.com:8080",
+    "type": "http",
+    "label": "EU-Frankfurt-GeoTest",
+    "region": "DE"
+  },
+  {
+    "id": "proxy_uk_south_1",
+    "url": "http://user:secret@uk-south.proxy.example.com:8080",
+    "type": "http",
+    "label": "UK-London-GeoTest",
+    "region": "GB"
+  }
+]

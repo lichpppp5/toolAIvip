@@ -1,0 +1,64 @@
+version: 1
+
+pipeline:
+  input_path: ""
+  output_dir: "./output"
+  working_dir: "./tmp"
+
+modules:
+  m1:
+    enabled: true
+    strip_provenance: false
+    face_confidence_threshold: 0.9
+    redaction_method: "blur"
+    audio_normalize: true
+    crf: 23
+    preset: "medium"
+    noise: 4
+
+  m2:
+    enabled: false   # opt-in via --research-only flag
+    perturbations:
+      - gaussian_noise
+      - compression
+      - brightness
+    watermark_opacity: 0.8
+
+  m3:
+    enabled: true
+    region: "US"
+    proxy_url: null
+    browser_timeout_ms: 30000
+
+  m4:
+    enabled: true
+    obs_host: "localhost"
+    obs_port: 4455
+    obs_password_secret: "obs_ws_password"
+    rtmp_url: "rtmp://live.tiktok.com/live/"
+    scenes:
+      - "Intro"
+      - "Main"
+    sample_rate: 44100
+
+environment:
+  vault_path: "./secrets/vault.age"
+  identity_path: "~/.config/liveguard/identity.age"
+
+logging:
+  level: "INFO"
+  format: "json"
+  audit_log_path: "./audit/audit.jsonl"
+
+dashboard:
+  enabled: false
+  host: "127.0.0.1"
+  port: 8501
+
+compliance:
+  disclosure_banner:
+    enabled: true
+    text: "This stream uses AI-assisted preparation tools."
+    position: "bottom-right"
+  tos_ack_hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  tos_ack_at: "2026-10-24T00:00:00Z"

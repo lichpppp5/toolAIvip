@@ -1,0 +1,21 @@
+{
+  "liveguard_version": "0.1.0",
+  "module": "M2",
+  "input_path": "/workspace/data/clean_stream.mp4",
+  "watermarked_path": "/workspace/data/perturbed_research.mp4",
+  "input_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "output_hash": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae",
+  "perturbations_applied": [
+    "pgd_clip"
+  ],
+  "mean_ssim": 0.9682,
+  "mean_psnr": 42.41,
+  "eps_used": 0.03137254901960784,
+  "iters": 40,
+  "device": "cuda:0",
+  "duration_seconds": 28.45,
+  "frames_processed": 900,
+  "eps_reductions": 0,
+  "watermark_visible": true,
+  "completed_at": "2026-10-24T15:30:00.000000+00:00"
+}

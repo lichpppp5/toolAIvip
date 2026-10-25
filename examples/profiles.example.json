@@ -1,0 +1,38 @@
+[
+  {
+    "id": "creator_us",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewport": {
+      "w": 1920,
+      "h": 1080
+    },
+    "timezone": "America/New_York",
+    "locale": "en-US",
+    "proxy": {
+      "url": "http://user:secret@us-east.proxy.example.com:8080",
+      "type": "http",
+      "label": "US-East-Datacenter"
+    },
+    "createdAt": "2026-10-24T00:00:00Z",
+    "allow_passive_feed_scroll": false,
+    "allow_interactions": false
+  },
+  {
+    "id": "creator_eu",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    "viewport": {
+      "w": 1280,
+      "h": 720
+    },
+    "timezone": "Europe/Berlin",
+    "locale": "de-DE",
+    "proxy": {
+      "url": "http://user:secret@eu-central.proxy.example.com:8080",
+      "type": "http",
+      "label": "EU-Central-Datacenter"
+    },
+    "createdAt": "2026-10-24T00:00:00Z",
+    "allow_passive_feed_scroll": true,
+    "allow_interactions": false
+  }
+]

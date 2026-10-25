@@ -1,0 +1,37 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+
+# Testing & coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+**/node_modules/
+
+# Secrets & Live Data
+secrets/
+logs/
+audit/
+runtime/
+
+# Test fixtures media
+tests/fixtures/*.mp4
+
+# OS artifacts
+.DS_Store
+Thumbs.db

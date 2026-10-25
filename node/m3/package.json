@@ -1,0 +1,26 @@
+{
+  "name": "liveguard-m3",
+  "version": "0.1.0",
+  "description": "M3 — Geo-Test & Session Manager browser runtime for LiveGuard",
+  "private": true,
+  "type": "module",
+  "main": "src/browser.js",
+  "scripts": {
+    "start": "node src/browser.js",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest",
+    "lint": "eslint src/"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "playwright": "1.46.*",
+    "axios": "1.7.*",
+    "pino": "9.*"
+  },
+  "devDependencies": {
+    "jest": "29.*",
+    "@types/jest": "29.*",
+    "eslint": "9.*"
+  }
+}

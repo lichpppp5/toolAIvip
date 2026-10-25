@@ -1,0 +1,157 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "liveguard"
+version = "0.1.0"
+description = "Local-only creator toolchain for compliant livestream preparation"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10,<3.12"
+authors = [{ name = "LiveGuard Authors" }]
+
+dependencies = [
+    # Config & data validation
+    "pydantic==2.9.*",
+    # Structured logging
+    "structlog==24.*",
+    # CLI framework
+    "typer>=0.15",
+    "click>=8.4",
+    # YAML config parsing
+    "pyyaml==6.*",
+    # .env secret loading (pre-vault bootstrap only)
+    "python-dotenv==1.*",
+    # OBS WebSocket client
+    "obsws-python==1.7.*",
+    # Async HTTP (geo probes, health endpoints)
+    "aiohttp==3.10.*",
+    # Encryption for secrets vault (pyrage Rust bindings for rage / age spec)
+    "pyrage>=1.4.0",
+    # Prometheus metrics exposition
+    "prometheus-client==0.20.*",
+]
+
+[project.optional-dependencies]
+dashboard = [
+    "streamlit==1.39.*",
+]
+ml = [
+    # PyTorch CPU/GPU backend for face detection & watermarking
+    "torch==2.4.*",
+    # OpenCLIP for CLIP-based content analysis
+    "open-clip-torch==2.26.*",
+    # TorchVision transforms
+    "torchvision==0.19.*",
+    # Image quality metrics (SSIM, PSNR)
+    "scikit-image==0.24.*",
+    # Face detection
+    "facenet-pytorch==2.6.*",
+]
+dev = [
+    "pytest==8.*",
+    "pytest-cov==5.*",
+    "pytest-mock==3.*",
+    "pytest-asyncio==0.24.*",
+    "hypothesis==6.*",
+    "mypy==1.11.*",
+    "ruff==0.6.*",
+    "black==24.*",
+    # Fuzzing (Linux only; gracefully skipped on macOS/Windows)
+    "atheris==2.3.*; sys_platform == 'linux'",
+    # Type stubs
+    "types-pyyaml>=6.0",
+]
+
+[project.scripts]
+liveguard = "liveguard.cli.main:app"
+
+[project.urls]
+Repository = "https://github.com/example/liveguard"
+Documentation = "https://github.com/example/liveguard/tree/main/docs"
+
+# ---------------------------------------------------------------------------
+# Tool configuration
+# ---------------------------------------------------------------------------
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["liveguard*"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+    "D",   # pydocstyle
+    "ANN", # flake8-annotations
+]
+ignore = [
+    "D100",   # Missing docstring in public module (covered by package __init__)
+    "D104",   # Missing docstring in public package
+    "ANN101", # Missing type annotation for self
+    "ANN102", # Missing type annotation for cls
+    "ANN401", # Disallowing Any in **kwargs
+    "B008",   # Typer function call in argument defaults
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D", "ANN", "S101", "E501"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_any_generics = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[[tool.mypy.overrides]]
+module = [
+    "obsws_python.*",
+    "streamlit.*",
+    "structlog.*",
+    "prometheus_client.*",
+    "open_clip.*",
+    "skimage.*",
+    "PIL.*",
+    "pyrage.*",
+]
+ignore_missing_imports = true
+disallow_untyped_calls = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-q"
+log_cli = false
+
+[tool.coverage.run]
+source = ["liveguard"]
+omit = ["liveguard/cli/*", "tests/*", "liveguard/dashboard/app.py"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true

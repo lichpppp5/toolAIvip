@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  liveguard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: liveguard:latest
+    container_name: liveguard-app
+    ports:
+      - "8501:8501"  # Streamlit Dashboard
+      - "8080:8080"  # HTTP Health Endpoint (/healthz)
+      - "9090:9090"  # Prometheus Metrics (/metrics)
+    volumes:
+      - ./liveguard.yaml:/app/liveguard.yaml:ro
+      - ./secrets:/app/secrets
+      - ./audit:/app/audit
+      - ./logs:/app/logs
+      - ./runtime:/app/runtime
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: ["dashboard", "--host", "0.0.0.0", "--port", "8501"]
+    restart: unless-stopped
+
+  node-m3:
+    image: node:20-slim
+    container_name: liveguard-node-m3
+    working_dir: /app/node/m3
+    volumes:
+      - ./node/m3:/app/node/m3
+    command: ["node", "src/browser.js", "--headless", "--profile", "default", "--action", "check"]
+    environment:
+      - NODE_ENV=production
+    restart: "no"
